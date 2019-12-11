@@ -10,23 +10,25 @@ import Pictures from "./components/picture"
 class App extends Component {
 
   state = {
-    pictures: pictures,
+    pictures,
     score: 0,
     highscore: 0
   }
 
-  scoreGame = card => {
-    if ( !card.clicked ) {
-      this.setState({ score: +1});
-      card.clicked = true;
+  scoreGame = picture => {
+    if ( !picture.clicked ) {
+      this.setState({ score: this.state.score + 1});
+      picture.clicked = true;
+      // this.shuffleArray(this.state.pictures);
+      console.log("was clicked")
     }
     else {
-      this.gameOver(this.state.score)
+      this.gameOver();
     }
   }
 
-  gameOver = score => {
-    if (score > this.state.highscore) {
+  gameOver = () => {
+    if (this.state.score > this.state.highscore) {
       this.setState({ highscore: this.state.score});
       this.setState({ score: 0});
       this.state.pictures.map( picture => picture.click = false)
@@ -40,23 +42,29 @@ class App extends Component {
         [array[i], array[j]] = [array[j], array[i]];
     }
     console.log(array);
+    this.setState({ pictures: array })
+  }
+
+  showCards = pictures => {
+   
   }
 
   render() {
 
     return (
       <div>
-        <Navbar score={4}/>
+        <Navbar score={this.state.score} highscore={this.state.highscore}/>
         <div className="container">
           <Jumbotron/>
           <Main>
+            {/* {this.shuffleArray(pictures)} */}
             {this.state.pictures.map( picture => (
               <Pictures 
-                id={picture.name}
+                key={picture.name}
                 name={picture.name}
                 image={picture.image}
                 clicked={picture.clicked}
-                onClick={this.shuffleArray(pictures) this.scoreGame()}
+                onClick={this.scoreGame(picture)}
                 />
             ))}
           </Main>
