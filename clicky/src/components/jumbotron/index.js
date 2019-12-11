@@ -3,7 +3,7 @@ import "./style.css";
 
 function Jumbotron() {
   return(
-    <div className="jumbotron">
+    <div className="jumbotron text-center">
       <p>
         1. Score a point by clicking on an image for the first time!
       </p>

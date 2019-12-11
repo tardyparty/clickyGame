@@ -1,5 +1,8 @@
 .jumbotron {
   height: 50px;
   padding-top: 20px;
-  padding-bottom: 80px;
+  padding-bottom: 110px;
+  font-size: 18pt;
+  background: #bfd8d5;
+  color: #0a065d;
 }

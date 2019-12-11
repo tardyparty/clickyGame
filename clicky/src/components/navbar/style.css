@@ -1,4 +1,18 @@
 .navbar {
-  background: #444444;
-  color: #ffffff;
+  background: #b1bed5;
+  color: #0a065d;
+  height: 80px;
+  font-size: 25pt;
+  overflow: hidden;
+  box-shadow: 0 3px 6px #0a065d, 0 3px 6px #0a065d;
+}
+
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+
+.sticky + .content {
+  padding-top: 60px;
 }
