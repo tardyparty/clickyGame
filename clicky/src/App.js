@@ -16,13 +16,17 @@ class App extends Component {
   }
 
   scoreGame = picture => {
+
+    console.log("scoreGame called");
+    
     if ( !picture.clicked ) {
       this.setState({ score: this.state.score + 1});
       picture.clicked = true;
       // this.shuffleArray(this.state.pictures);
-      console.log("was clicked")
+      console.log(picture.clicked)
     }
     else {
+      console.log("gameOver called");
       this.gameOver();
     }
   }
@@ -42,11 +46,11 @@ class App extends Component {
         [array[i], array[j]] = [array[j], array[i]];
     }
     console.log(array);
-    this.setState({ pictures: array })
+    // this.setState({ pictures: array })
   }
 
-  showCards = pictures => {
-   
+  showCards = () => {
+   console.log("hi")
   }
 
   render() {
@@ -64,7 +68,7 @@ class App extends Component {
                 name={picture.name}
                 image={picture.image}
                 clicked={picture.clicked}
-                onClick={this.scoreGame(picture)}
+                clickEvent={()=> this.scoreGame(picture)}
                 />
             ))}
           </Main>
