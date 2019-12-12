@@ -14,7 +14,8 @@ constructor(props) {
   this.state = {
     pictures,
     score: 0,
-    highscore: 0
+    highscore: 0,
+    status: "Click!"
   }
   this.baseState = this.state
 }
@@ -28,11 +29,12 @@ constructor(props) {
       this.setState({ score: this.state.score + 1});
       picture.clicked = true;
       this.shuffleArray(this.state.pictures);
-      // this.setState({ pictures: this.shuffleArray(this.state.pictures)})
+      this.setState({ status: "Click Again!"});
       console.log(picture.clicked)
     }
     else {
       console.log("gameOver called");
+      this.setState({ status: "Game Over :("})
       this.shuffleArray(this.state.pictures)
       this.gameOver();
     }
@@ -64,7 +66,7 @@ constructor(props) {
 
     return (
       <div>
-        <Navbar score={this.state.score} highscore={this.state.highscore}/>
+        <Navbar status={this.state.status} score={this.state.score} highscore={this.state.highscore}/>
         <div className="container">
           <Jumbotron/>
           <Main>

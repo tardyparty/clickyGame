@@ -6,8 +6,8 @@ function Navbar(props) {
   return(
     <nav className="navbar">
       <h1>clickyGame</h1>
-      <h1>Score: {props.score}</h1>
-      <h1>Highscore: {props.highscore}</h1>
+      <h1>{props.status}</h1>
+      <h1>Score: {props.score} | Highscore: {props.highscore}</h1>
     </nav>
   )
 }
