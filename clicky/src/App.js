@@ -9,12 +9,16 @@ import Pictures from "./components/picture";
 import Footer from "./components/footer";
 
 class App extends Component {
-
-  state = {
+constructor(props) {
+  super(props)
+  this.state = {
     pictures,
     score: 0,
     highscore: 0
   }
+  this.baseState = this.state
+}
+
 
   scoreGame = picture => {
 
@@ -23,11 +27,13 @@ class App extends Component {
     if ( !picture.clicked ) {
       this.setState({ score: this.state.score + 1});
       picture.clicked = true;
-      // this.shuffleArray(this.state.pictures);
+      this.shuffleArray(this.state.pictures);
+      // this.setState({ pictures: this.shuffleArray(this.state.pictures)})
       console.log(picture.clicked)
     }
     else {
       console.log("gameOver called");
+      this.shuffleArray(this.state.pictures)
       this.gameOver();
     }
   }
@@ -35,9 +41,13 @@ class App extends Component {
   gameOver = () => {
     if (this.state.score > this.state.highscore) {
       this.setState({ highscore: this.state.score});
-      this.setState({ score: 0});
-      this.state.pictures.map( picture => picture.click = false)
     }
+    this.setState({ score: 0});
+    this.setState({ pictures: pictures.map( picture => {
+        picture.clicked = false;
+        return picture
+    })});
+    this.shuffleArray(this.state.pictures);
   }
 
   // Javascript version of the Durstenfeld Shuffle Algorithm
@@ -47,7 +57,7 @@ class App extends Component {
         [array[i], array[j]] = [array[j], array[i]];
     }
     console.log(array);
-    // this.setState({ pictures: array })
+    this.setState({ pictures: array })
   }
 
   render() {
@@ -61,12 +71,13 @@ class App extends Component {
             {/* {this.shuffleArray(pictures)} */}
             {this.state.pictures.map( picture => (
               <Pictures 
-                key={picture.name}
-                name={picture.name}
-                image={picture.image}
-                clicked={picture.clicked}
-                onClick={this.scoreGame}
-                />
+              picture={picture}
+              key={picture.name}
+              name={picture.name}
+              image={picture.image}
+              clicked={picture.clicked}
+              clickFn={this.scoreGame}
+              />
             ))}
           </Main>
         </div>
