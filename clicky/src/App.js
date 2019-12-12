@@ -5,7 +5,8 @@ import Jumbotron from "./components/jumbotron";
 import Main from "./components/main";
 // import Wrapper from "./components/wrapper";
 import pictures from "./pictures.json";
-import Pictures from "./components/picture"
+import Pictures from "./components/picture";
+import Footer from "./components/footer";
 
 class App extends Component {
 
@@ -49,10 +50,6 @@ class App extends Component {
     // this.setState({ pictures: array })
   }
 
-  showCards = () => {
-   console.log("hi")
-  }
-
   render() {
 
     return (
@@ -68,11 +65,12 @@ class App extends Component {
                 name={picture.name}
                 image={picture.image}
                 clicked={picture.clicked}
-                clickEvent={()=> this.scoreGame(picture)}
+                onClick={this.scoreGame}
                 />
             ))}
           </Main>
         </div>
+        <Footer />
       </div>
     );
   }
